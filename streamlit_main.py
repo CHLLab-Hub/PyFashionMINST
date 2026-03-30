@@ -125,7 +125,10 @@ def save_uploaded_file(directory, file):
     return st.success('파일 업로드 성공')
 
 st.title("FashionMNIST")
+
 img_file = st.file_uploader("이미지를 입력하세요", type=['png', 'jpg', 'jpeg'])
 if img_file:
     save_uploaded_file('images', img_file)
-    st.images(f'images/{img_file.name}')
+    st.image(f'images/{img_file.name}')
+    _, pred_class = predict(os.path.join('images', img_file.name), model, transform)
+    st.subheader(pred_class)
